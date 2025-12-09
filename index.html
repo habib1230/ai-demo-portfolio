@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio | Nano Banana Edition</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Lenis for smooth scroll (optional but creating "award winning" feel) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script> 
+</head>
+<body class="dark-theme">
+    
+    <div class="cursor-follower"></div>
+
+    <header class="header">
+        <div class="logo">NANO BANANA</div>
+        <nav class="nav">
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="hero-bg-container">
+                <div class="hero-gradient"></div>
+                <canvas id="hero-canvas"></canvas>
+                <img src="assets/hero-bg.png" alt="Abstract Nano Background" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <div class="line"><span>DIGITAL</span></div>
+                    <div class="line"><span>EXPERIENCE</span></div>
+                    <div class="line"><span class="outline">CRAFTER</span></div>
+                </h1>
+                <p class="hero-subtitle">Merging code with nano-precision aesthetics.</p>
+                <div class="scroll-indicator">
+                    <span>SCROLL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee Section -->
+        <section class="marquee-section">
+            <div class="marquee-track">
+                <div class="marquee-content">
+                    CREATIVE DEVELOPER — UI/UX DESIGN — WEBGL — NANO BANANA — CREATIVE DEVELOPER — UI/UX DESIGN — WEBGL — NANO BANANA —
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    CREATIVE DEVELOPER — UI/UX DESIGN — WEBGL — NANO BANANA — CREATIVE DEVELOPER — UI/UX DESIGN — WEBGL — NANO BANANA —
+                </div>
+            </div>
+        </section>
+
+        <section class="work" id="work">
+            <div class="section-header">
+                <h2>SELECTED WORK</h2>
+                <div class="line-break"></div>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card" data-speed="0.9">
+                    <div class="project-image-container">
+                        <img src="assets/project-1.png" alt="Project 1" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <h3>Cyber Dashboard</h3>
+                        <p>Fintech / React / WebGL</p>
+                    </div>
+                </article>
+                <article class="project-card" data-speed="1.1">
+                    <div class="project-image-container">
+                        <img src="assets/project-2.png" alt="Project 2" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <h3>Neon Architecture</h3>
+                        <p>Real Estate / Vue / Three.js</p>
+                    </div>
+                </article>
+                <article class="project-card" data-speed="1.0">
+                    <div class="project-image-container">
+                        <img src="assets/project-3.png" alt="Project 3" class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <h3>Abstract Commerce</h3>
+                        <p>E-commerce / Shopify / GSAP</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="about-content">
+                <h2>I BUILD NEXT-LEVEL WEBSITES.</h2>
+                <p>Inspired by the future. Powered by clean code. From fluid animations to robust backends, I deliver award-winning digital solutions.</p>
+                <ul class="skills-list">
+                    <li>Frontend Development</li>
+                    <li>WebGL & 3D</li>
+                    <li>Interaction Design</li>
+                    <li>Creative Coding</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="contact-wrapper">
+                <h2>LET'S TALK</h2>
+                <a href="mailto:hello@nanobanana.dev" class="email-link">HELLO@NANOBANANA.DEV</a>
+                <div class="socials">
+                    <a href="#">Twitter</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Nano Banana. All rights reserved.</p>
+    </footer>
+
+
+
+
+    
+    <script src="script.js"></script>
+
+    <!-- Not required if jQuery is already loaded -->
+        <script src="https://aichat.thehomepros.org/js/min/jquery.min.js"></script>
+        <script id="sbinit" src="https://aichat.thehomepros.org/js/main.js"></script>
+
+
+
+        <!-- <script>
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://api.anychat.one/widget2/load?id=ee1dd235-89c7-30bc-959d-38e3c04949f7&r=' + encodeURIComponent(window.location);
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'anw2-sdk-NdId7seJvDCVnTjjwElJ9w'));
+        </script> -->
+</body>
+</html>

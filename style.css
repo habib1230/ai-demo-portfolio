@@ -1,0 +1,407 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #ffffff;
+    --accent-color: #eaff00; /* Neon Yellow "Nano Banana" */
+    --secondary-color: #1a1a1a;
+    --font-main: 'Space Grotesk', sans-serif;
+    --gap: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    cursor: none; /* Custom cursor */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: none;
+}
+
+/* Custom Cursor */
+.cursor-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.cursor-hover {
+    width: 60px;
+    height: 60px;
+    opacity: 0.5;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+}
+
+.nav-link {
+    margin-left: 2rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-color);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+    transform: translateX(0);
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Above gradient/image, below content */
+    pointer-events: none;
+}
+
+.hero-gradient {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(234, 255, 0, 0.05) 0%, rgba(5, 5, 5, 0) 60%);
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 8rem;
+    line-height: 0.9;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hero-title .line {
+    overflow: hidden;
+}
+
+.hero-title span {
+    display: block;
+    transform: translateY(100%);
+}
+
+.outline {
+    -webkit-text-stroke: 1px var(--text-color);
+    color: transparent;
+}
+
+.hero-subtitle {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #888;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    opacity: 0;
+}
+
+/* Marquee */
+.marquee-section {
+    padding: 2rem 0;
+    overflow: hidden;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    transform: rotate(-2deg) scale(1.05); /* Jaunty angle */
+    margin: 4rem 0;
+}
+
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.marquee-content {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-right: 2rem;
+    will-change: transform;
+}
+
+/* Work */
+.work {
+    padding: 10rem 4rem;
+}
+
+.section-header {
+    margin-bottom: 6rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    font-weight: 400;
+    overflow: hidden; /* For text reveal */
+}
+
+/* Spotlight Effect */
+.project-card {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden; /* Contain the spotlight */
+}
+
+/* Spotlight Glow */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(234, 255, 0, 0.1), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-image-container, .project-info {
+    z-index: 1; /* Stay above spotlight */
+}
+
+.project-card:nth-child(even) {
+    grid-template-columns: 1fr 1.5fr;
+    direction: rtl; /* Simple way to swap, need to adjust text-align back */
+}
+.project-card:nth-child(even) .project-info {
+    direction: ltr; /* Reset text direction */
+    text-align: right;
+}
+
+.project-image-container {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+}
+
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image-container:hover .placeholder-img {
+    transform: scale(1.05);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image-container:hover .project-image {
+    transform: scale(1.05);
+}
+
+.project-info h3 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.project-info p {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* About */
+.about {
+    padding: 10rem 4rem;
+    /* background: #080808; */
+}
+
+.about-content h2 {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 4rem;
+    max-width: 80%;
+}
+
+.about-content p {
+    font-size: 1.5rem;
+    color: #aaa;
+    max-width: 60%;
+    margin-bottom: 4rem;
+}
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.skills-list li {
+    font-size: 1.2rem;
+    border: 1px solid #333;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.skills-list li:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    border-color: var(--accent-color);
+}
+
+/* Contact */
+.contact {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.email-link {
+    font-size: 6vw; /* Big dynamic text */
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4rem;
+    transition: color 0.3s;
+}
+
+.email-link:hover {
+    color: var(--accent-color);
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.socials a {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.footer {
+    padding: 2rem 4rem;
+    text-align: center;
+    border-top: 1px solid #111;
+    color: #444;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header { padding: 1.5rem 2rem; }
+    .hero-title { font-size: 4rem; }
+    .work, .about { padding: 5rem 2rem; }
+    .project-card, .project-card:nth-child(even) { 
+        grid-template-columns: 1fr; 
+        direction: ltr;
+        gap: 2rem;
+    }
+    .project-card:nth-child(even) .project-info {
+        text-align: left;
+    }
+    .project-image-container { height: 40vh; }
+    .about-content h2 { font-size: 3rem; }
+    .email-link { font-size: 3rem; }
+}
