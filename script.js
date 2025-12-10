@@ -94,17 +94,9 @@ gsap.to('.marquee-track', {
         end: 'bottom top',
         scrub: 1
     },
-    xPercent: -20, // Move based on scroll
+    xPercent: 20, // Move Right (Left to Right) on scroll down
     ease: 'none'
 });
-
-// Constant infinite marquee flow
-gsap.to('.marquee-content', {
-    xPercent: -100,
-    repeat: -1,
-    duration: 10,
-    ease: 'linear'
-}).totalProgress(0.5);
 
 
 
@@ -220,9 +212,42 @@ if (canvas) {
 }
 
 
-// Scroll Animations
+// Horizontal Scroll & Pinning
+const projectsGrid = document.querySelector('.projects-grid');
+const progressBar = document.querySelector('.work-progress-bar');
+
+function getScrollAmount() {
+    return -(projectsGrid.scrollWidth - window.innerWidth);
+}
+
+const scrollTween = gsap.to(projectsGrid, {
+    x: getScrollAmount,
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".work",
+        start: "top top",
+        end: () => "+=" + (projectsGrid.scrollWidth - window.innerWidth),
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
+    }
+});
+
+// Progress Bar Animation (Linked to same scroll distance)
+gsap.to(progressBar, {
+    width: "100%",
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".work",
+        start: "top top",
+        end: () => "+=" + (projectsGrid.scrollWidth - window.innerWidth),
+        scrub: 1
+    }
+});
+
+// Individual Card Entrance (Fade Up)
 gsap.utils.toArray('.project-card').forEach((card, i) => {
-    // Spotlight Effect
+    // Spotlight Effect (Keep existing logic or minimal version)
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -231,31 +256,20 @@ gsap.utils.toArray('.project-card').forEach((card, i) => {
         card.style.setProperty('--mouse-y', `${y}px`);
     });
 
-    // Reveal Animation
-    gsap.from(card, {
-        scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-    });
-    
-    // Staggered Text Reveal inside card
-    const chars = card.querySelectorAll('h3 span');
-    gsap.to(chars, {
-        scrollTrigger: {
-            trigger: card,
-            start: 'top 75%'
-        },
+    gsap.to(card, {
         y: 0,
         opacity: 1,
-        stagger: 0.05,
         duration: 1,
-        ease: 'power4.out'
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: card,
+            containerAnimation: scrollTween, // Link to horizontal scroll
+            start: "left 120%", // Animate before it fully enters
+            toggleActions: "play none none reverse"
+        }
     });
+
+    // Staggered Text Reveal inside card (Optional, keeping simple fade up for now as requested)
 });
 
 gsap.to('.section-header h2 span', {

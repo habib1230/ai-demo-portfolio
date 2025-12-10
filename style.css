@@ -198,22 +198,45 @@ a {
 
 /* Work */
 .work {
-    padding: 10rem 4rem;
+    padding: 10rem 0; /* Remove side padding to allow full bleed scroll or handle in container */
+    overflow: hidden;
+    position: relative; /* Context for progress bar */
+}
+
+.work-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background-color: var(--accent-color);
+    z-index: 20;
 }
 
 .section-header {
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
     border-bottom: 1px solid #333;
     padding-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    padding-left: 4rem; /* Restore padding here */
+    padding-right: 4rem;
 }
 
 .section-header h2 {
     font-size: 3rem;
     font-weight: 400;
     overflow: hidden; /* For text reveal */
+}
+
+/* Horizontal Scroll Setup */
+.projects-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8rem;
+    padding: 0 4rem; /* Start with some padding */
+    width: fit-content;
 }
 
 /* Spotlight Effect */
@@ -223,11 +246,18 @@ a {
     gap: 4rem;
     align-items: center;
     position: relative;
-    padding: 2rem;
+    padding: 3rem;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden; /* Contain the spotlight */
+    overflow: hidden;
+    width: 70vw; /* Wide cards */
+    flex-shrink: 0;
+    
+    /* Initial state for entrance animation */
+    /* Opacity/Transform controlled by GSAP now */
+    opacity: 0;
+    transform: translateY(100px);
 }
 
 /* Spotlight Glow */
@@ -250,15 +280,15 @@ a {
 }
 
 .project-image-container, .project-info {
-    z-index: 1; /* Stay above spotlight */
+    z-index: 1; 
 }
 
 .project-card:nth-child(even) {
     grid-template-columns: 1fr 1.5fr;
-    direction: rtl; /* Simple way to swap, need to adjust text-align back */
+    direction: rtl; 
 }
 .project-card:nth-child(even) .project-info {
-    direction: ltr; /* Reset text direction */
+    direction: ltr; 
     text-align: right;
 }
 
