@@ -272,6 +272,44 @@ gsap.utils.toArray('.project-card').forEach((card, i) => {
     // Staggered Text Reveal inside card (Optional, keeping simple fade up for now as requested)
 });
 
+// Chat Widget Scroll Fix (Lenis Compatibility)
+function fixChatScroll() {
+    // Common selectors for Support Board and similar widgets
+    const chatSelectors = ['#sb-main', '.sb-main', '#sb-chat', '.sb-chat', '.sb-container'];
+    
+    const applyFix = () => {
+        chatSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                if (!el.hasAttribute('data-lenis-prevent')) {
+                    el.setAttribute('data-lenis-prevent', 'true');
+                    // Also force stop propagation on wheel events just in case
+                    el.addEventListener('wheel', (e) => {
+                        e.stopPropagation();
+                    }, { passive: false });
+                }
+            });
+        });
+    };
+
+    // Watch for widget injection
+    const observer = new MutationObserver(() => {
+        applyFix();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Initial and delayed checks
+    applyFix();
+    setTimeout(applyFix, 1000);
+    setTimeout(applyFix, 3000);
+}
+
+// Initialize fix
+if (typeof MutationObserver !== 'undefined') {
+    fixChatScroll();
+}
+
 gsap.to('.section-header h2 span', {
     scrollTrigger: {
         trigger: '.section-header',
